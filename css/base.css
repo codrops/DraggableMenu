@@ -129,6 +129,8 @@ a:focus {
 	position: absolute;
 	top: 0;
 	height: 100%;
+	width: 100%;
+	overflow: hidden;
 	pointer-events: none;
 }
 
@@ -254,7 +256,7 @@ a:focus {
 	grid-template-columns: 100%;
 	grid-template-rows: 3rem 1fr;
 	position: relative;
-	padding: 12rem 5vw 2rem;
+	padding: 13rem 5vw 2rem;
 	pointer-events: none;
 }
 
