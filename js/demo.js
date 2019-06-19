@@ -29,7 +29,7 @@
             posx = e.pageX;
             posy = e.pageY;
         }
-        else if (e.clientX || e.clientY) 	{
+        else if (e.clientX || e.clientY)    {
             posx = e.clientX + body.scrollLeft + document.documentElement.scrollLeft;
             posy = e.clientY + body.scrollTop + document.documentElement.scrollTop;
         }
@@ -160,10 +160,10 @@
         spread(animate = false) {
             return new Promise((resolve, reject) => {
                 let animateCount = 0;
+                const gridHeight = this.DOM.el.scrollHeight;
+                const gridTop = this.DOM.el.offsetTop;
                 this.DOM.imageWrap.forEach((item) => {
                     const rect = item.getBoundingClientRect();
-                    const gridHeight = this.DOM.el.scrollHeight;
-                    const gridTop = this.DOM.el.offsetTop;
                     
                     // Item´s center point
                     const center = {x: rect.left+rect.width/2, y: rect.top+rect.height/2};
