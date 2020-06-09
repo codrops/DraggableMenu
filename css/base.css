@@ -297,29 +297,12 @@ a:focus {
 	grid-template-columns: repeat(10,calc(var(--gridwidth) / 10 - var(--gridgap)));
 	grid-gap: var(--gridgap);
 	align-content: center;
-    justify-content: center;
+    	justify-content: center;
 }
 
 .grid__item-wrap {
 	position: relative;
 	will-change: transform;
-}
-
-.grid__item::after {
-	content: '';
-	background: rgba(241,241,241,1);
-	opacity: 0;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	transition: opacity 0.8s cubic-bezier(0.19,1,0.22,1);
-	will-change: opacity;
-}
-
-.page--preview .grid__item::after {
-	opacity: 0.4;
 }
 
 .grid__item {
@@ -331,6 +314,13 @@ a:focus {
 	background-position: 50% 50%;
 	background-size: cover;
 	will-change: transform;
+	-webkit-filter: grayscale(0) contrast(1) brightness(1);
+	filter: grayscale(0) contrast(1) brightness(1);
+}
+
+.page--preview .grid__item {
+	-webkit-filter: grayscale(0.5) contrast(0.4) brightness(1.5);
+	filter: grayscale(0.5) contrast(0.4) brightness(1.5);
 }
 
 /* Layout 1 */
