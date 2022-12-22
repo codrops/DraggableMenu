@@ -83,7 +83,11 @@
 
     // Calculate the viewport size
     let winsize;
-    const calcWinsize = () => winsize = {width: window.innerWidth, height: window.innerHeight};
+    const calcWinsize = () => {
+        const frame = document.getElementsByTagName('main')[0]
+        winsize = { width: frame.clientWidth, height: frame.clientHeight }
+        // winsize = {width: window.innerWidth, height: window.innerHeight}
+    };
     calcWinsize();
     window.addEventListener('resize', calcWinsize);
 
@@ -262,14 +266,19 @@
             window.addEventListener('resize', () => this.rect = this.DOM.el.getBoundingClientRect());
         }
         setCurrent() {
-            this.DOM.el.classList.add('menu__item--current');
+            // this.DOM.el.classList.add('menu__item--current');
+            window.location.hash = this.DOM.el.children[1].hash
+            // console.log('just set', this.DOM.el.children[1].hash, window.location.hash)
             return this;
         }
         unsetCurrent() {
-            this.DOM.el.classList.remove('menu__item--current');
+            // this.DOM.el.classList.remove('menu__item--current');
+            // console.log('just unset', this.DOM.el)
         }
         isCurrent() {
+            // console.log('just found', this.DOM.el)
             return this.DOM.el.classList.contains('menu__item--current');
+            
         }
         // Show/Hide the explore link 
         showExplore() {

@@ -220,7 +220,7 @@ a:focus {
 	text-decoration: none;
 }
 
-.page--preview ~ .menu-wrap .menu__item--current .menu__item-explore {
+.page--preview ~ .menu-wrap .menu__item--current .menu__item-explore, .grid__item-wrap {
 	pointer-events: auto;
 }
 
