@@ -303,6 +303,7 @@ a:focus {
 .grid__item-wrap {
 	position: relative;
 	will-change: transform;
+	filter: grayscale(1);
 }
 
 .grid__item {
