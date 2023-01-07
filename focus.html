@@ -130,17 +130,12 @@
 			<nav class="menu">
 				<div v-for="(chapter, c) in chapters"
 					:class="['menu__item', current === chapter.title ? 'menu__item--current' : '']" :key="c">
-
-					<a :href="`#${chapter.title}`">
-						<a class="subtitle">{{ chapter.subtitle }}</a>
-						<a class="menu__item-link">{{ chapter.title }}</a>
-						<h4 class="description"> {{ chapter.description }} </h4>
-						<a class="menu__item-explore">Press Play</a>
-
-					</a>
-
+					<a class="menu__item-link">{{ chapter.title }}</a>
+					<a :href="`#${chapter.title}`" class="menu__item-explore">explore</a>
 				</div>
-			</nav>
+
+		</div>
+		</nav>
 		</div>
 	</main>
 
@@ -193,7 +188,7 @@
 							{
 								type: 'link',
 								data: {
-									img:'https://mediamixtape.netlify.app/uploads/vloek-op-de-overvloed.jpeg',
+									img: 'https://mediamixtape.netlify.app/uploads/vloek-op-de-overvloed.jpeg',
 									src: 'https://myprivacy.dpgmedia.nl/consent?siteKey=PUBX2BuuZfEPJ6vF&callbackUrl=https%3a%2f%2fwww.volkskrant.nl%2fprivacy-wall%2faccept%3fredirectUri%3d%252fcolumns-opinie%252fnederland-loopt-tegen-de-grenzen-van-zijn-groei-aan-het-is-tijd-dat-de-politiek-durft-in-te-grijpen%257eba1440f7%252f'
 								}
 							},
@@ -214,18 +209,18 @@
 							{
 								type: 'video',
 								data: {
-									img:'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-25-at-14.10.53.png',
+									img: 'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-25-at-14.10.53.png',
 									src: 'https://www.youtube.com/watch?v=KJpj2K343dc'
 								}
 							},
 							{
 								type: 'video',
 								data: {
-									img:'https://mediamixtape.netlify.app/uploads/bng-thehoodie-sheray-22.jpg',
+									img: 'https://mediamixtape.netlify.app/uploads/bng-thehoodie-sheray-22.jpg',
 									src: 'https://www.youtube.com/watch?v=kPgohNERJBI&t=2029s'
 								}
 							},
-							]
+						]
 					},
 					{
 						title: 'Systeem',
@@ -235,60 +230,60 @@
 							{
 								type: 'video',
 								data: {
-									img:'https://mediamixtape.netlify.app/uploads/17.-2005_peripherie_lemiroir-1024x1365.jpeg',
+									img: 'https://mediamixtape.netlify.app/uploads/17.-2005_peripherie_lemiroir-1024x1365.jpeg',
 									src: 'https://youtu.be/5FeVUVo-A3s'
 								}
 							}, {
 								type: 'video',
 								data: {
-									img:'https://mediamixtape.netlify.app/uploads/17.-2005_peripherie_lemiroir-1024x1365.jpeg',
+									img: 'https://mediamixtape.netlify.app/uploads/17.-2005_peripherie_lemiroir-1024x1365.jpeg',
 									src: 'https://youtu.be/OB_CtnmU5uY'
 								}
 							}, {
 								type: 'video',
 								data: {
-									img:'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-24-at-18.43.52.png',
+									img: 'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-24-at-18.43.52.png',
 									src: 'https://youtu.be/TOEc0gn_De4'
 								}
 							}, {
 								type: 'video',
 								data: {
-									img:'https://mediamixtape.netlify.app/uploads/nacor-ik-spreek-geen-systeem.jpg',
+									img: 'https://mediamixtape.netlify.app/uploads/nacor-ik-spreek-geen-systeem.jpg',
 									src: 'https://youtu.be/-XrZ3e5akb8'
 								}
 							},
 							{
 								type: 'video',
 								data: {
-									img:'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-24-at-18.53.36.png',
+									img: 'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-24-at-18.53.36.png',
 									src: 'https://www.youtube.com/watch?v=OqCyl3eU__I'
 								}
 							},
 							{
 								type: 'video',
 								data: {
-									img:'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-24-at-18.53.36.png',
+									img: 'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-24-at-18.53.36.png',
 									src: 'https://youtu.be/Sqb1SbrFPj8'
 								}
 							},
 							{
 								type: 'video',
 								data: {
-									img:'https://mediamixtape.netlify.app/uploads/shay-participatie-is-niet-nieuw.jpg',
+									img: 'https://mediamixtape.netlify.app/uploads/shay-participatie-is-niet-nieuw.jpg',
 									src: 'https://youtu.be/NZvLqDCeEuo'
 								}
 							},
 							{
 								type: 'video',
 								data: {
-									img:'	https://mediamixtape.netlify.app/uploads/screenshot-2022-11-10-at-15.58.02.png',
+									img: '	https://mediamixtape.netlify.app/uploads/screenshot-2022-11-10-at-15.58.02.png',
 									src: 'https://youtu.be/J6k5U2KeL1w'
 								}
 							},
 							{
 								type: 'video',
 								data: {
-									img:'https://mediamixtape.netlify.app/uploads/zico-schijnparticipatie.jpg',
+									img: 'https://mediamixtape.netlify.app/uploads/zico-schijnparticipatie.jpg',
 									src: 'https://youtu.be/u0lKNPanjUc'
 								}
 							},
@@ -302,31 +297,31 @@
 						items: [{
 							type: 'video',
 							data: {
-								img:'https://via.placeholder.com/150',
+								img: 'https://via.placeholder.com/150',
 								src: 'https://youtu.be/rw9Kpuhru8M'
 							}
 						}, {
 							type: 'video',
 							data: {
-								img:'https://via.placeholder.com/150',
+								img: 'https://via.placeholder.com/150',
 								src: 'https://youtu.be/ccStnC20z7g'
 							}
 						}, {
 							type: 'link',
 							data: {
-								img:'https://via.placeholder.com/150',
+								img: 'https://via.placeholder.com/150',
 								src: 'https://www.volkskrant.nl/nieuws-achtergrond/hosselaar-william-ruto-nieuwe-president-kenia-gevechten-bij-bekendmaking-uitslag~b4ac4ec7/'
 							}
 						}, {
 							type: 'video',
 							data: {
-								img:'https://via.placeholder.com/150',
+								img: 'https://via.placeholder.com/150',
 								src: 'https://youtu.be/o9MZmaWvSOU'
 							}
 						}, {
 							type: 'link',
 							data: {
-								img:'https://via.placeholder.com/150',
+								img: 'https://via.placeholder.com/150',
 								src: 'https://africasacountry.com/2021/07/makeshift-modernity'
 							}
 						},]
@@ -339,38 +334,38 @@
 							{
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/j2m_2puGksc'
 								}
 							},
 							{
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/N3yJWynTsbw'
 								}
 							}, {
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/TSLCuh4Zzgo'
 								}
 							}, {
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/CpVEeIGUlUg'
 								}
 							}, {
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/N3yJWynTsbw'
 								}
 							}, {
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/kPgohNERJBI?t=2143'
 								}
 							}]
@@ -383,7 +378,7 @@
 							{
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/FI84-0J9vm4'
 								}
 							}]
@@ -396,35 +391,35 @@
 							{
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/FI84-0J9vm4'
 								}
 							},
 							{
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/vOLuTIYZPBI'
 								}
 							},
 							{
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/-XrZ3e5akb8'
 								}
 							},
 							{
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/QFXt85kTxbg'
 								}
 							},
 							{
 								type: 'video',
 								data: {
-									img:'https://via.placeholder.com/150',
+									img: 'https://via.placeholder.com/150',
 									src: 'https://youtu.be/y9wUVI5ylYE'
 								}
 							}]
@@ -436,42 +431,42 @@
 						items: [{
 							type: 'video',
 							data: {
-								img:'https://via.placeholder.com/150',
+								img: 'https://via.placeholder.com/150',
 								src: 'https://youtu.be/g1NfpeHAgo0'
 							}
 						},
 						{
 							type: 'video',
 							data: {
-								img:'https://via.placeholder.com/150',
+								img: 'https://via.placeholder.com/150',
 								src: 'https://youtu.be/ke7LRk85sSs'
 							}
 						},
 						{
 							type: 'video',
 							data: {
-								img:'https://via.placeholder.com/150',
+								img: 'https://via.placeholder.com/150',
 								src: 'https://youtu.be/FEzPutFBr_c'
 							}
 						},
 						{
 							type: 'video',
 							data: {
-								img:'https://via.placeholder.com/150',
+								img: 'https://via.placeholder.com/150',
 								src: 'https://youtu.be/fwulhcOAie4'
 							}
 						},
 						{
 							type: 'video',
 							data: {
-								img:'https://via.placeholder.com/150',
+								img: 'https://via.placeholder.com/150',
 								src: 'https://youtu.be/AjjmlpQyMW0'
 							}
 						},
 						{
 							type: 'video',
 							data: {
-								img:'https://via.placeholder.com/150',
+								img: 'https://via.placeholder.com/150',
 								src: 'https://youtu.be/TwMe1Z_aRNs'
 							}
 						}]
