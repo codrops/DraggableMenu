@@ -406,6 +406,16 @@ h4 {
 .grid--layout-6 .grid__item-wrap:nth-child(8) {grid-area: 4 / 9 / 9 / 11;}
 .grid--layout-6 .grid__item-wrap:nth-child(9) {grid-area: 7 / 5 / 11 / 9;}
 
+/* layout 7*/
+.grid--layout-7 .grid__item-wrap:first-child { grid-area: 2 / 1 / 5 / 4; }
+.grid--layout-7 .grid__item-wrap:nth-child(2) { grid-area: 1 / 4 / 4 / 7; }
+.grid--layout-7 .grid__item-wrap:nth-child(3) {grid-area: 1 / 7 / 5 / 10;}
+.grid--layout-7 .grid__item-wrap:nth-child(4) {grid-area: 5 / 1 / 7 / 4;}
+.grid--layout-7 .grid__item-wrap:nth-child(5) {grid-area: 4 / 4 / 7 / 7;}
+.grid--layout-7 .grid__item-wrap:nth-child(6) {grid-area: 7 / 7 / 11 / 4;}
+.grid--layout-7 .grid__item-wrap:nth-child(7) {grid-area: 5 / 7 / 8 / 11;}
+.grid--layout-7 .grid__item-wrap:nth-child(8) {grid-area: 7 / 2 / 9 / 4;}
+
 .page--preview {
 	position: relative;
 	overflow: hidden;
