@@ -337,8 +337,9 @@
             // MenuItem instances
             this.menuItems = [];
             [...this.DOM.menu.querySelectorAll('.menu__item')].forEach((item, position) => this.menuItems.push(new MenuItem(item, this.imageGrids[position])));
-            // Total number of menu items
+            // Total number of menu items+
             this.menuItemsTotal = this.menuItems.length;
+            console.log('this.menuItems.length', this.menuItems.length)
             // Index of the current menuItem
             this.current = 0;
             // Set the first menu item to current and show its explore link
@@ -653,6 +654,7 @@
             
             // Clicking the explore opens up the grid for the current menu item
             for ( let menuItem of this.menuItems ) {
+                console.log('menuItem', menuItem)
                 menuItem.DOM.explore.addEventListener('click', () => this.showContent());
             }
 
