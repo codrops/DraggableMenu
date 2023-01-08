@@ -130,7 +130,9 @@
 			<nav class="menu">
 				<div v-for="(chapter, c) in chapters"
 					:class="['menu__item', current === chapter.title ? 'menu__item--current' : '']" :key="c">
+					<!-- <h4>{{ chapter.subtitle }}</h4> -->
 					<a class="menu__item-link">{{ chapter.title }}</a>
+					<h4 class="description">{{ chapter.description }}</h4>
 					<a :href="`#${chapter.title}`" class="menu__item-explore">explore</a>
 				</div>
 
