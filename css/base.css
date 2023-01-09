@@ -199,7 +199,7 @@ a:focus {
 .menu__item-link {
 	color: currentColor;
 	font-weight: bold;
-	font-size: 12vw;
+	font-size: 6em;
 	display: flex;
 	line-height: 1.2;
 	font-family: 'Antique Olive Nord D';
