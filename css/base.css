@@ -202,6 +202,7 @@ a:focus {
 	font-size: 12vw;
 	display: flex;
 	line-height: 1.2;
+	font-family: 'Antique Olive Nord D';
 }
 
 .menu__item-explore {
@@ -421,6 +422,15 @@ h4 {
 	overflow: hidden;
 	height: 100vh;
 	pointer-events: none;
+}
+
+@font-face {
+    font-family: 'Antique Olive Nord D';
+    src: url('../fonts/AntiqueOliNorD-Regu.woff2') format('woff2'),
+        url('../fonts/AntiqueOliNorD-Regu.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @media screen and (min-width: 53em) {

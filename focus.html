@@ -44,7 +44,7 @@
 
 <body id="app" class="loading uk-flex uk-flex-row-reverse uk-grid uk-grid-collapse">
 
-	<aside class="uk-width-medium uk-card-default uk-card-small uk-visible@m" style="z-index: 1000">
+	<aside class="uk-width-medium uk-card-default uk-card-small uk-hidden" style="z-index: 1000">
 		<div class="uk-card-header ">
 			<div class="uk-flex uk-flex-between">
 				<div>Design Board</div>
@@ -72,7 +72,7 @@
 		</div>
 	</aside>
 
-	<main id="gjs" class="uk-width-expand">
+	<main class="uk-width-expand">
 		<!-- <div class="frame">
 			<div class="frame__pagetitle">Draggable Menu with Grid Previews</div>
 			<div class="frame__title-wrap">
@@ -98,17 +98,23 @@
 					<a v-for="(item, i) in chapter.items" :href="`${item.data.src}`" :key="`${c}${i}`"
 						class="grid__item-wrap" :data-alt="item.type">
 
-						<template v-if="item.type === 'image' ">
-							<div class="grid__item" :style="`background-image: url(${item.data.src})`"></div>
+						<template v-if="item.type !== 'iframe'">
+							<template v-if="item.type === 'image' ">
+								<div class="grid__item" :style="`background-image: url(${item.data.src})`"></div>
+							</template>
+							<template v-else-if="item.type === 'video' ">
+								<div class="grid__item" :style="`background-image: url(${item.data.img})`"></div>
+							</template>
+							<!-- <template v-else-if="item.type === 'iframe' ">
+								<div class="grid__item" :style="`background-image: url(${item.data.img})`"></div>
+							</template> -->
+							<template v-else>
+								<div class="grid__item"
+									:style="`background-image: url(https://via.placeholder.com/150?text=${item.data.src})`">
+								</div>
+							</template>
 						</template>
-						<template v-if="item.type === 'video' ">
-							<div class="grid__item" :style="`background-image: url(${item.data.img})`"></div>
-						</template>
-						<template v-else>
-							<div class="grid__item"
-								:style="`background-image: url(https://via.placeholder.com/150?text=${item.data.src})`">
-							</div>
-						</template>
+
 
 
 					</a>
@@ -128,13 +134,17 @@
 		<div class="menu-wrap">
 			<div class="menu-draggable"></div>
 			<nav class="menu">
+
 				<div v-for="(chapter, c) in chapters"
 					:class="['menu__item', current === chapter.title ? 'menu__item--current' : '']" :key="c">
-					<!-- <h4>{{ chapter.subtitle }}</h4> -->
-					<a class="menu__item-link">{{ chapter.title }}</a>
-					<h4 class="description">{{ chapter.description }}</h4>
-					<a :href="`#${chapter.title}`" class="menu__item-explore">explore</a>
+					<a class="menu__item-link uk-flex uk-flex-center">{{ chapter.title }}</a>
+					<h4 class="description uk-width-large uk-margin-auto">
+						{{ chapter.description}}
+					</h4>
+					<a :href="`#${chapter.title}`" class="menu__item-explore">Press Play</a>
 				</div>
+
+
 
 		</div>
 		</nav>
@@ -188,7 +198,7 @@
 								}
 							},
 							{
-								type: 'link',
+								type: 'iframe',
 								data: {
 									img: 'https://mediamixtape.netlify.app/uploads/vloek-op-de-overvloed.jpeg',
 									src: 'https://myprivacy.dpgmedia.nl/consent?siteKey=PUBX2BuuZfEPJ6vF&callbackUrl=https%3a%2f%2fwww.volkskrant.nl%2fprivacy-wall%2faccept%3fredirectUri%3d%252fcolumns-opinie%252fnederland-loopt-tegen-de-grenzen-van-zijn-groei-aan-het-is-tijd-dat-de-politiek-durft-in-te-grijpen%257eba1440f7%252f'
@@ -309,7 +319,7 @@
 								src: 'https://youtu.be/ccStnC20z7g'
 							}
 						}, {
-							type: 'link',
+							type: 'iframe',
 							data: {
 								img: '	https://mediamixtape.netlify.app/uploads/hossel-president.webp',
 								src: 'https://www.volkskrant.nl/nieuws-achtergrond/hosselaar-william-ruto-nieuwe-president-kenia-gevechten-bij-bekendmaking-uitslag~b4ac4ec7/'
@@ -321,7 +331,7 @@
 								src: 'https://youtu.be/o9MZmaWvSOU'
 							}
 						}, {
-							type: 'link',
+							type: 'iframe',
 							data: {
 								img: 'https://mediamixtape.netlify.app/uploads/malique-buurt-vertalen-.jpg',
 								src: 'https://africasacountry.com/2021/07/makeshift-modernity'
@@ -373,7 +383,7 @@
 						description: 'Publieke instellingen willen impact hebben op een snel veranderende samenleving, maar weten niet altijd hoe. Burgers en ondernemers willen een actieve rol spelen in het vormgeven van hun leefomgeving, maar weten ook niet altijd even goed hoe. Het programma Parallelle werelden en Tussenruimtes organiseert die hoe. Benieuwd hoe we dat de komende jaren gaan doen? In deze outro blikken we vooruit.',
 						items: [
 							{
-								type: 'link',
+								type: 'iframe',
 								data: {
 									img: 'https://malique.info/uploads/the-hoodie-bts-25.jpg',
 									src: 'https://www.instagram.com/thehoodieunravelled/'
@@ -516,20 +526,6 @@
 					version.value = version.value + 1
 				}
 
-				const editor = grapesjs.init({
-					// Indicate where to init the editor. You can also pass an HTMLElement
-					container: '#gjs',
-					// Get the content for the canvas directly from the element
-					// As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
-					fromElement: true,
-					// Size of the editor
-					height: '300px',
-					width: 'auto',
-					// Disable the storage manager for the moment
-					storageManager: false,
-					// Avoid any default panel
-					panels: { defaults: [] },
-				});
 
 				// expose to template and other options API hooks
 				return {
@@ -544,14 +540,11 @@
 				window.addEventListener('popstate', this.setCurrentHash)
 			},
 			methods: {
-				setCurrentHash() {
+				setCurrentHash(i) {
 					// console.log('before', this.pointer)
 					const before = this.pointer
 					this.current = window.location.hash.slice(1)
 					this.pointer = this.chapters.findIndex(chapter => chapter.title === this.current)
-
-					console.log('from', before + 1)
-					console.log('isnw', this.chapters.findIndex(chapter => chapter.title === this.current) + 1)
 				}
 			}
 		}).mount('#app')
