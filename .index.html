@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Draggable Menu with Grid Previews | Codrops</title>
+	<meta name="description" content="A draggable menu that shows a thumbnail preview of an image grid" />
+	<meta name="keywords"
+		content="draggable, menu, navigation, thumbnails, grid, javascript, gsap, web design, layout" />
+	<meta name="author" content="Codrops" />
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="https://use.typekit.net/crf4rue.css">
+	
+	<!-- <link rel="stylesheet" type="text/css" href="css/uikit.min.css" /> -->
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+	<script>document.documentElement.className = "js"; var supportsCssVars = function () { var e, t = document.createElement("style"); return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e }; supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
+</head>
+
+<body id="app" class="loading">
+
+	<main>
+		<div class="frame">
+			<div class="frame__pagetitle">Draggable Menu with Grid Previews</div>
+			<div class="frame__title-wrap">
+				<h1 class="frame__title">Yuri Shevchenko</h1>
+				<p class="frame__tagline">2008 &mdash; 2019</a></p>
+			</div>
+			<div class="frame__links">
+				<a href="https://tympanus.net/Development/DraggableImageStrip/">Previous Demo</a>
+				<a href="https://tympanus.net/codrops/?p=40926">Article</a>
+				<a href="https://github.com/codrops/DraggableMenu/">GitHub</a>
+			</div>
+			<div class="frame__social">
+				<a href="#" aria-label="Link to Yuri's Behance profile"><img src="img/behance.svg"
+						class="frame__social-behance" alt="Behance Logo" /></a>
+			</div>
+		</div>
+		
+		<div class="page page--preview">
+			<div class="grid-wrap">
+				<div v-for="(chapter, c) in chapters" :class="`grid grid--layout-${c+1}`" :key="c">
+					<div v-for="(item, i) in chapter.items" class="grid__item-wrap" :key="`${i}-${c}`">
+						<div class="grid__item" :style="`background-image: url(img/${item}.jpg)`"></div>
+					</div>
+				</div>
+				<button class="gridback"><svg width="27px" height="15px" viewBox="0 0 27 15">
+						<path
+							d="M1.469 6.75l-.719.719 7.938 6.937.718-.719L1.47 6.75zM8.594.531L.75 7.375l.688.688L9.28 1.218 8.594.53zM1.406 6.938v1h24.75v-1H1.406z"
+							fill="#de6565" />
+					</svg></button>
+			</div><!-- /grid-wrap -->
+		</div><!-- /page -->
+
+		<div class="menu-wrap">
+			<div class="menu-draggable"></div>
+			<nav class="menu">
+				<div  v-for="(chapter, c) in chapters" class="menu__item">
+					<a class="menu__item-link">{{ chapter.title }}</a>
+					<a class="menu__item-explore">explore</a>
+				</div>
+			</nav>
+		</div>
+	</main>
+
+	<div class="cursor">
+		<div class="cursor__inner cursor__inner--circle">
+			<div class="cursor__side cursor__side--left"></div>
+			<div class="cursor__side cursor__side--right"></div>
+		</div>
+	</div>
+	
+	
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+	<script>
+		const { createApp } = Vue
+
+		createApp({
+			data() {
+				return {
+					messsage: 'hello world',
+					navigation: ['Mezcala', 'Caricia', 'Esquirla', 'Sangre', 'Petricor'],
+					chapters: [
+						{
+							title: 'Mezcala',
+							items: [1,2,3,4,5/* ,6,7,8,9 */]
+						},
+						{
+							title: 'Caricia',
+							items: [10,11,12,13,14/* ,15,16,17 */]
+						},
+						{
+							title: 'Esquirla',
+							items: [18,19,20,21,22/* ,23,24,42,43 */]
+						},
+						{
+							title: 'Sangre',
+							items: [25,26,27,28,29/* ,30,31,32 */]
+						},
+						{
+							title: 'Petricor',
+							items: [33,34,35,36,37/* ,38,39,40,41 */]
+						}
+					]
+				}
+			}
+		}).mount('#app')
+	</script>
+	<script src="js/uikit.min.js"></script>
+	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/charming.min.js"></script>
+	<script src="js/TweenMax.min.js"></script>
+	<script src="js/draggabilly.pkgd.min.js"></script>
+	<script src="js/demo.js"></script>
+</body>
+
+</html>

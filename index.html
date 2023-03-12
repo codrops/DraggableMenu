@@ -1,129 +1,560 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Draggable Menu with Grid Previews | Codrops</title>
-		<meta name="description" content="A draggable menu that shows a thumbnail preview of an image grid" />
-		<meta name="keywords" content="draggable, menu, navigation, thumbnails, grid, javascript, gsap, web design, layout" />
-		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="favicon.ico">
-		<link rel="stylesheet" href="https://use.typekit.net/crf4rue.css">
-		<link rel="stylesheet" type="text/css" href="css/base.css" />
-		<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-		<script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
-	</head>
-	<body class="loading">
-		<main>
-			<div class="frame">
-				<div class="frame__pagetitle">Draggable Menu with Grid Previews</div>
-				<div class="frame__title-wrap">
-					<h1 class="frame__title">Yuri Shevchenko</h1>
-					<p class="frame__tagline">2008 &mdash; 2019</a></p>
-				</div>
-				<div class="frame__links">
-					<a href="https://tympanus.net/Development/DraggableImageStrip/">Previous Demo</a>
-					<a href="https://tympanus.net/codrops/?p=40926">Article</a>
-					<a href="https://github.com/codrops/DraggableMenu/">GitHub</a>
-				</div>
-				<div class="frame__social">
-					<a href="#" aria-label="Link to Yuri's Behance profile"><img src="img/behance.svg" class="frame__social-behance" alt="Behance Logo"/></a>
-				</div>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Draggable Menu with Grid Previews | Codrops</title>
+	<meta name="description" content="A draggable menu that shows a thumbnail preview of an image grid" />
+	<meta name="keywords"
+		content="draggable, menu, navigation, thumbnails, grid, javascript, gsap, web design, layout" />
+	<meta name="author" content="Codrops" />
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="https://use.typekit.net/crf4rue.css">
+	<link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Seymour+One&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/uikit.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<style>
+		.uk-lightbox {
+			z-index: 10110;
+		}
+
+		/* Let's highlight canvas boundaries */
+		#gjs {
+			border: 3px solid #444;
+		}
+
+		/* Reset some default styling */
+		.gjs-cv-canvas {
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.subtitle {
+			color: rgb(0, 0, 0)
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+	<script>document.documentElement.className = "js"; var supportsCssVars = function () { var e, t = document.createElement("style"); return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e }; supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
+</head>
+
+<body id="app" class="loading uk-flex uk-flex-row-reverse uk-grid uk-grid-collapse">
+
+	<aside class="uk-width-medium uk-card-default uk-card-small uk-hidden" style="z-index: 1000">
+		<div class="uk-card-header ">
+			<div class="uk-flex uk-flex-between">
+				<div>Design Board</div>
+				<div>{{ current }}</div>
+				<div>{{ pointer + 1 }}</div>
 			</div>
-			<div class="page page--preview">
-				<div class="grid-wrap">
-					<div class="grid grid--layout-1">
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/1.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/2.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/3.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/4.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/5.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/6.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/7.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/8.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/9.jpg)"></div></div>
-					</div>
-					<div class="grid grid--layout-2">
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/10.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/11.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/12.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/13.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/14.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/15.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/16.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/17.jpg)"></div></div>
-					</div>
-					<div class="grid grid--layout-3">
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/18.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/19.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/20.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/21.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/22.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/23.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/24.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/42.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/43.jpg)"></div></div>
-					</div>
-					<div class="grid grid--layout-4">
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/25.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/26.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/27.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/28.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/29.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/30.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/31.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/32.jpg)"></div></div>
-					</div>
-					<div class="grid grid--layout-5">
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/33.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/34.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/35.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/36.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/37.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/38.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/39.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/40.jpg)"></div></div>
-						<div class="grid__item-wrap"><div class="grid__item" style="background-image: url(img/41.jpg)"></div></div>
-					</div>
-					<button class="gridback"><svg width="27px" height="15px" viewBox="0 0 27 15"><path d="M1.469 6.75l-.719.719 7.938 6.937.718-.719L1.47 6.75zM8.594.531L.75 7.375l.688.688L9.28 1.218 8.594.53zM1.406 6.938v1h24.75v-1H1.406z" fill="#de6565"/></svg></button>
-				</div><!-- /grid-wrap -->
-			</div><!-- /page -->
-			<div class="menu-wrap">
-				<div class="menu-draggable"></div>
-				<nav class="menu">
-					<div class="menu__item">
-						<a class="menu__item-link">Mezcala</a>
-						<a class="menu__item-explore">explore</a>
-					</div>
-					<div class="menu__item">
-						<a class="menu__item-link">Caricia</a>
-						<a class="menu__item-explore">explore</a>
-					</div>
-					<div class="menu__item">
-						<a class="menu__item-link">Esquirla</a>
-						<a class="menu__item-explore">explore</a>
-					</div>
-					<div class="menu__item">
-						<a class="menu__item-link">Sangre</a>
-						<a class="menu__item-explore">explore</a>
-					</div>
-					<div class="menu__item">
-						<a class="menu__item-link">Petricor</a>
-						<a class="menu__item-explore">explore</a>
-					</div>
-				</nav><!--menu-->
-			</div><!--/menu-wrap-->
-		</main>
-		<div class="cursor">
-			<div class="cursor__inner cursor__inner--circle">
-				<div class="cursor__side cursor__side--left"></div>
-				<div class="cursor__side cursor__side--right"></div>
-			</div>
+
 		</div>
-		<script src="js/imagesloaded.pkgd.min.js"></script>
-		<script src="js/charming.min.js"></script>
-		<script src="js/TweenMax.min.js"></script>
-		<script src="js/draggabilly.pkgd.min.js"></script>
-		<script src="js/demo.js"></script>
-	</body>
+		<div class="">
+			<ul class="uk-margin-remove" uk-accordion uk-sortable @stop="handleMove" :key="`list-${version}`">
+				<li v-for="(chapter, c) in chapters" :key="c" :id="c" class="uk-card-header uk-margin-remove">
+					<a class="uk-accordion-title" href="#">
+						<strong v-if="current === chapter.title">{{ chapter.title }}</strong>
+						<span v-else>{{ chapter.title }}</span>
+					</a>
+					<div class="uk-accordion-content">
+						<ul class="uk-iconnav" uk-sortable>
+							<li v-for="(item, i) in chapter.items">
+								<div class="uk-icon-button uk-border-rounded">{{ item }}</div>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</aside>
+
+	<main class="uk-width-expand">
+		<!-- <div class="frame">
+			<div class="frame__pagetitle">Draggable Menu with Grid Previews</div>
+			<div class="frame__title-wrap">
+				<h1 class="frame__title">Yuri Shevchenko</h1>
+				<p class="frame__tagline">2008 &mdash; 2019</a></p>
+			</div>
+			<div class="frame__links">
+				<a href="https://tympanus.net/Development/DraggableImageStrip/">Previous Demo</a>
+				<a href="https://tympanus.net/codrops/?p=40926">Article</a>
+				<a href="https://github.com/codrops/DraggableMenu/">GitHub</a>
+			</div>
+			<div class="frame__social">
+				<a href="#" aria-label="Link to Yuri's Behance profile"><img src="img/behance.svg"
+						class="frame__social-behance" alt="Behance Logo" /></a>
+			</div>
+		</div> -->
+
+		<div class="page page--preview">
+			<div class="grid-wrap">
+				<div v-for="(chapter, c) in chapters" :class="`grid grid--layout-${c+1}`" :key="c" :id="c"
+					:key="`flow-${version}`" uk-lightbox>
+
+					<a v-for="(item, i) in chapter.items" :href="`${item.data.src}`" :key="`${c}${i}`"
+						class="grid__item-wrap" :data-alt="item.type">
+
+						<template v-if="item.type !== 'iframe'">
+							<template v-if="item.type === 'image' ">
+								<div class="grid__item" :style="`background-image: url(${item.data.src})`"></div>
+							</template>
+							<template v-else-if="item.type === 'video' ">
+								<div class="grid__item" :style="`background-image: url(${item.data.img})`"></div>
+							</template>
+							<!-- <template v-else-if="item.type === 'iframe' ">
+								<div class="grid__item" :style="`background-image: url(${item.data.img})`"></div>
+							</template> -->
+							<template v-else>
+								<div class="grid__item"
+									:style="`background-image: url(https://via.placeholder.com/150?text=${item.data.src})`">
+								</div>
+							</template>
+						</template>
+
+
+
+					</a>
+
+
+				</div>
+				<button class="gridback">
+					<svg width="27px" height="15px" viewBox="0 0 27 15">
+						<path
+							d="M1.469 6.75l-.719.719 7.938 6.937.718-.719L1.47 6.75zM8.594.531L.75 7.375l.688.688L9.28 1.218 8.594.53zM1.406 6.938v1h24.75v-1H1.406z"
+							fill="#fffff" />
+					</svg>
+				</button>
+			</div><!-- /grid-wrap -->
+		</div><!-- /page -->
+
+		<div class="menu-wrap">
+			<div class="menu-draggable"></div>
+			<nav class="menu">
+
+				<div v-for="(chapter, c) in chapters"
+					:class="['menu__item', current === chapter.title ? 'menu__item--current' : '']" :key="c">
+					<a class="menu__item-link uk-flex uk-flex-center">{{ chapter.title }}</a>
+					<h4 class="description uk-width-large uk-margin-auto">
+						{{ chapter.description}}
+					</h4>
+					<a :href="`#${chapter.title}`" class="menu__item-explore">Press Play</a>
+				</div>
+
+
+
+		</div>
+		</nav>
+		</div>
+	</main>
+
+	<div class="cursor">
+		<div class="cursor__inner cursor__inner--circle">
+			<div class="cursor__side cursor__side--left"></div>
+			<div class="cursor__side cursor__side--right"></div>
+		</div>
+	</div>
+
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<script src="https://unpkg.com/@vueuse/shared"></script>
+	<script src="https://unpkg.com/@vueuse/core"></script>
+	<script src="https://unpkg.com/grapesjs"></script>
+	<script>
+		const { createApp, ref, computed } = Vue
+
+		createApp({
+			setup() {
+
+				const holder = ref('gjs')
+				const pointer = ref(0)
+				const version = ref(0)
+				const chapters = ref([
+					{
+						title: 'Intro',
+						subtitle: 'bodega',
+						description: 'We staan voor grote uitdagingen, of beter gezegd: crises. Mensen leven steeds vaker in de puinhoop van doorgeschoten marktwerking. Op de achtergrond sluimert de ecologische catastrofe rustig door. Het vertrouwen in de instituties die de samenleving organiseren is in kritieke toestand. Zouden dezelfde mensen en dezelfde structuren die ons tot verschillende crises hebben gebracht deze ook kunnen oplossen? ',
+						items: [
+							{
+								type: 'image',
+								data: {
+									src: 'https://mediamixtape.netlify.app/uploads/2048x1152.jpeg'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-24-at-18.32.09.png',
+									src: 'https://www.youtube.com/watch?v=uwtBVKnd-HM'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/shay-participatie-is-niet-nieuw.jpg',
+									src: 'https://www.youtube.com/watch?v=T5MtMZcKh0I'
+								}
+							},
+							{
+								type: 'iframe',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/vloek-op-de-overvloed.jpeg',
+									src: 'https://myprivacy.dpgmedia.nl/consent?siteKey=PUBX2BuuZfEPJ6vF&callbackUrl=https%3a%2f%2fwww.volkskrant.nl%2fprivacy-wall%2faccept%3fredirectUri%3d%252fcolumns-opinie%252fnederland-loopt-tegen-de-grenzen-van-zijn-groei-aan-het-is-tijd-dat-de-politiek-durft-in-te-grijpen%257eba1440f7%252f'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/vloek-op-de-overvloed.jpeg',
+									src: 'https://www.youtube.com/watch?v=TOEc0gn_De4'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/bng-thehoodie-sheray-20.jpg',
+									src: 'https://www.youtube.com/watch?v=kPgohNERJBI&t=1553s'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-25-at-14.10.53.png',
+									src: 'https://www.youtube.com/watch?v=KJpj2K343dc'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/bng-thehoodie-sheray-22.jpg',
+									src: 'https://www.youtube.com/watch?v=kPgohNERJBI&t=2029s'
+								}
+							},
+						]
+					},
+					{
+						title: 'Systeem',
+						subtitle: 'bodega',
+						description: 'Een alsmaar complexer wordende samenleving vraagt om responsief en flexibel handelen van mensen die de stad maken. Participatie, diversiteit en inclusie-beleid zijn pogingen om de complexiteit bij te benen - maar komen niet bij de kern. Als we weten dat het anders moet, waarom is veranderen dan zo moeilijk? In deze track bevragen we hoe de samenleving georganiseerd wordt in de wereld van bestuur, goede bedoelingen en trage processen aka de systeemwereld.',
+						items: [
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/17.-2005_peripherie_lemiroir-1024x1365.jpeg',
+									src: 'https://youtu.be/5FeVUVo-A3s'
+								}
+							}, {
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/17.-2005_peripherie_lemiroir-1024x1365.jpeg',
+									src: 'https://youtu.be/OB_CtnmU5uY'
+								}
+							}, {
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-24-at-18.43.52.png',
+									src: 'https://youtu.be/TOEc0gn_De4'
+								}
+							}, {
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/nacor-ik-spreek-geen-systeem.jpg',
+									src: 'https://youtu.be/-XrZ3e5akb8'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-24-at-18.53.36.png',
+									src: 'https://www.youtube.com/watch?v=OqCyl3eU__I'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-24-at-18.53.36.png',
+									src: 'https://youtu.be/Sqb1SbrFPj8'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/shay-participatie-is-niet-nieuw.jpg',
+									src: 'https://youtu.be/NZvLqDCeEuo'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: '	https://mediamixtape.netlify.app/uploads/screenshot-2022-11-10-at-15.58.02.png',
+									src: 'https://youtu.be/J6k5U2KeL1w'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/zico-schijnparticipatie.jpg',
+									src: 'https://youtu.be/u0lKNPanjUc'
+								}
+							},
+
+						]
+					},
+					{
+						title: 'Parallel',
+						subtitle: 'bodega',
+						description: 'Rotterdam staat bekend als een Superdiverse stad. Maar wat betekent dat eigenlijk? Jongeren uit migrantenwijken remixten decennia lang onbewust elkaars talen en culturen tot een nieuwe cultuur: een post-koloniale leefwereld die tussen werelden in ontstaat. Een wereld gekenmerkt door spanning en fluïditeit – en tegelijkertijd consumeerbaar en populair. Vandaag de dag beïnvloedt Urban Culture miljoenen Nederlanders en transformeert daarmee de normen, waarden en smaak van jonge stedelingen door het hele land. Een intieme kennis van deze stedelijke context is onmisbaar in het tackelen van de gelaagde opgaven van deze tijd*. In deze track zoomen we in op de instrumenten waarmee wij deze context lezen.',
+						items: [{
+							type: 'video',
+							data: {
+								img: 'https://mediamixtape.netlify.app/uploads/malique-fringecapitaal.jpg',
+								src: 'https://youtu.be/rw9Kpuhru8M'
+							}
+						}, {
+							type: 'video',
+							data: {
+								img: 'https://mediamixtape.netlify.app/uploads/malique-de-buurt.jpg',
+								src: 'https://youtu.be/ccStnC20z7g'
+							}
+						}, {
+							type: 'iframe',
+							data: {
+								img: '	https://mediamixtape.netlify.app/uploads/hossel-president.webp',
+								src: 'https://www.volkskrant.nl/nieuws-achtergrond/hosselaar-william-ruto-nieuwe-president-kenia-gevechten-bij-bekendmaking-uitslag~b4ac4ec7/'
+							}
+						}, {
+							type: 'video',
+							data: {
+								img: 'https://mediamixtape.netlify.app/uploads/malique-buurt-vertalen-.jpg',
+								src: 'https://youtu.be/o9MZmaWvSOU'
+							}
+						}, {
+							type: 'iframe',
+							data: {
+								img: 'https://mediamixtape.netlify.app/uploads/malique-buurt-vertalen-.jpg',
+								src: 'https://africasacountry.com/2021/07/makeshift-modernity'
+							}
+						},]
+					},
+					{
+						title: 'Tussenruimte',
+						subtitle: 'bodega',
+						description: 'Bestaande manieren van denken en doen zijn niet altijd het probleem. Instituten brengen stabiliteit en voorspelbaarheid (nice), maar zijn hierdoor niet ingericht om innovatie te stimuleren (niet zo nice). De Fringe daarentegen is onstuimig en rijk aan innovatie. Hoe ziet een derde ruimte eruit waar the best of both worlds samenkomt? Wij noemen die ruimte de Tussenruimte. Zouden we hiermee de opgaven van onze tijd beter tackelen? ',
+						items: [
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/malique-buurt-vertalen-.jpg',
+									src: 'https://youtu.be/j2m_2puGksc'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/janina-ruimte-om-te-experimenteren.jpg',
+									src: 'https://youtu.be/N3yJWynTsbw'
+								}
+							}, {
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/img_5974.jpg',
+									src: 'https://youtu.be/TSLCuh4Zzgo'
+								}
+							}, {
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/chinouk-klinkt-miss-beetje-cynisch.jpg',
+									src: 'https://youtu.be/CpVEeIGUlUg'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/bng-thehoodie-sheray-3.jpg',
+									src: 'https://youtu.be/kPgohNERJBI?t=2143'
+								}
+							}]
+					},
+					{
+						title: 'Outro',
+						subtitle: 'bodega',
+						description: 'Publieke instellingen willen impact hebben op een snel veranderende samenleving, maar weten niet altijd hoe. Burgers en ondernemers willen een actieve rol spelen in het vormgeven van hun leefomgeving, maar weten ook niet altijd even goed hoe. Het programma Parallelle werelden en Tussenruimtes organiseert die hoe. Benieuwd hoe we dat de komende jaren gaan doen? In deze outro blikken we vooruit.',
+						items: [
+							{
+								type: 'iframe',
+								data: {
+									img: 'https://malique.info/uploads/the-hoodie-bts-25.jpg',
+									src: 'https://www.instagram.com/thehoodieunravelled/'
+								}
+							},
+							{
+								type: 'image',
+								data: {
+									src: 'https://malique.info/uploads/the-hoodie-bts-37.jpg'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/notes-voordelen-van-de-toolkit.jpg',
+									src: 'https://youtu.be/FI84-0J9vm4'
+								}
+							}]
+					},
+					{
+						title: 'Bonus1',
+						subtitle: 'bodega',
+						description: 'De stad anno nu vraagt om een responsief ontwerp- en bestuurspraktijk. Het is helaas nog te vaak niet het geval. Om die reden hebben we een toolkit ontwikkeld, die we ookwel Open-Sauce toolkit noemen. Deze toolkit is beschikbaar voor iedereen, die het fringekapitalisme van de buurt wilt laten opbloeien.',
+						items: [
+							{
+								type: 'image',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/74-chevy-nova-with-brains.jpeg',
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/shay-participatie-is-niet-nieuw.jpg',
+									src: 'https://youtu.be/vOLuTIYZPBI'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/nacor-ik-spreek-geen-systeem.jpg',
+									src: 'https://youtu.be/-XrZ3e5akb8'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/zico-rol-prof.jpg',
+									src: 'https://youtu.be/QFXt85kTxbg'
+								}
+							},
+							{
+								type: 'video',
+								data: {
+									img: 'https://mediamixtape.netlify.app/uploads/eindje-nul-filter-malique.jpg',
+									src: 'https://youtu.be/y9wUVI5ylYE'
+								}
+							}]
+					},
+					{
+						title: 'Bonus2',
+						subtitle: 'bodega',
+						description: 'Shout-out naar alle mensen die tijdens deze fase ons en elkaar hebben geholpen om de kracht en kennis met elkaar te delen.',
+						items: [{
+							type: 'video',
+							data: {
+								img: 'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-10-at-15.53.41.png',
+								src: 'https://youtu.be/g1NfpeHAgo0'
+							}
+						},
+						{
+							type: 'video',
+							data: {
+								img: 'https://mediamixtape.netlify.app/uploads/maxresdefault.jpeg',
+								src: 'https://youtu.be/ke7LRk85sSs'
+							}
+						},
+						{
+							type: 'video',
+							data: {
+								img: 'https://mediamixtape.netlify.app/uploads/020f05e7-73b0-4dcd-bf44-5499ab870a0b.png',
+								src: 'https://youtu.be/FEzPutFBr_c'
+							}
+						},
+						{
+							type: 'video',
+							data: {
+								img: 'https://mediamixtape.netlify.app/uploads/malique-modellen-theorieen.jpg',
+								src: 'https://youtu.be/fwulhcOAie4'
+							}
+						},
+						{
+							type: 'video',
+							data: {
+								img: 'https://mediamixtape.netlify.app/uploads/screenshot-2022-11-10-at-15.52.57.png',
+								src: 'https://youtu.be/AjjmlpQyMW0'
+							}
+						},
+						{
+							type: 'video',
+							data: {
+								img: 'https://mediamixtape.netlify.app/uploads/janina-ruimte-om-te-experimenteren.jpg',
+								src: 'https://youtu.be/TwMe1Z_aRNs'
+							}
+						}]
+					},
+				])
+				const current = ref(chapters.value[0].title)
+				const handleMove = (event) => {
+					const data = chapters
+					const order = Array.from(event.target.children)
+					const items = Array.from(document.getElementsByClassName('menu__item'))
+
+					// window.location.hash = order.find((o, p) => pointer.value === p).innerText
+					/* const el = order.find((o, p) => pointer.value === p && o.id != p)
+					if(el) {
+						console.log('hash', el.innerText, window.location.hash.slice(1))
+					} */
+
+					// window.location.hash = order.find((o, p) => pointer.value === p).innerText
+					const signal = {
+						node: pointer.value,
+						fill: order.find((o, p) => pointer.value === p).innerText,
+						hash: window.location.hash,
+					}
+
+					if (window.location.hash.slice(1) !== signal.fill) {
+						console.log(signal.fill, signal.node)
+						window.location.hash = signal.fill
+						pointer.value = signal.node
+						console.log(current.value)
+					}
+
+
+
+					function toData(i) {
+						return chapters.value.find(d => d.title === i.innerText)
+					}
+					chapters.value = order.map(toData)
+					version.value = version.value + 1
+				}
+
+
+				// expose to template and other options API hooks
+				return {
+					pointer,
+					current,
+					version,
+					chapters,
+					handleMove
+				}
+			},
+			mounted() {
+				window.addEventListener('popstate', this.setCurrentHash)
+			},
+			methods: {
+				setCurrentHash(i) {
+					// console.log('before', this.pointer)
+					const before = this.pointer
+					this.current = window.location.hash.slice(1)
+					this.pointer = this.chapters.findIndex(chapter => chapter.title === this.current)
+				}
+			}
+		}).mount('#app')
+	</script>
+	<script src="js/uikit.min.js"></script>
+	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/charming.min.js"></script>
+	<script src="js/TweenMax.min.js"></script>
+	<script src="js/draggabilly.pkgd.min.js"></script>
+	<script src="js/demo.js"></script>
+</body>
+
 </html>

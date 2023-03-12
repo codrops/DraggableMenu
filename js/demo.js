@@ -83,7 +83,11 @@
 
     // Calculate the viewport size
     let winsize;
-    const calcWinsize = () => winsize = {width: window.innerWidth, height: window.innerHeight};
+    const calcWinsize = () => {
+        const frame = document.getElementsByTagName('main')[0]
+        winsize = { width: frame.clientWidth, height: frame.clientHeight }
+        // winsize = {width: window.innerWidth, height: window.innerHeight}
+    };
     calcWinsize();
     window.addEventListener('resize', calcWinsize);
 
@@ -262,14 +266,20 @@
             window.addEventListener('resize', () => this.rect = this.DOM.el.getBoundingClientRect());
         }
         setCurrent() {
-            this.DOM.el.classList.add('menu__item--current');
+            // this.DOM.el.classList.add('menu__item--current');
+  
+            window.location.hash = this.DOM.el.children[2].hash
+            // console.log('just set', this.DOM.el.children[1].hash, window.location.hash)
             return this;
         }
         unsetCurrent() {
-            this.DOM.el.classList.remove('menu__item--current');
+            // this.DOM.el.classList.remove('menu__item--current');
+            // console.log('just unset', this.DOM.el)
         }
         isCurrent() {
+            // console.log('just found', this.DOM.el)
             return this.DOM.el.classList.contains('menu__item--current');
+            
         }
         // Show/Hide the explore link 
         showExplore() {
@@ -328,8 +338,9 @@
             // MenuItem instances
             this.menuItems = [];
             [...this.DOM.menu.querySelectorAll('.menu__item')].forEach((item, position) => this.menuItems.push(new MenuItem(item, this.imageGrids[position])));
-            // Total number of menu items
+            // Total number of menu items+
             this.menuItemsTotal = this.menuItems.length;
+            console.log('this.menuItems.length', this.menuItems.length)
             // Index of the current menuItem
             this.current = 0;
             // Set the first menu item to current and show its explore link
@@ -644,6 +655,7 @@
             
             // Clicking the explore opens up the grid for the current menu item
             for ( let menuItem of this.menuItems ) {
+                console.log('menuItem', menuItem)
                 menuItem.DOM.explore.addEventListener('click', () => this.showContent());
             }
 
@@ -683,6 +695,13 @@
             // Remove this class so we see a scrollable area now
             this.DOM.pagePreview.classList.remove('page--preview');
 
+            const descriptions = [...document.getElementsByClassName('description')]
+            descriptions.forEach(el => {
+                el.classList.add('uk-hidden')
+            })
+           
+            
+
             let promises = [];
             // Reset the transforms of the grid items forming again the original grid
             promises.push(this.menuItems[this.current].imageGrid.collapse());
@@ -700,6 +719,11 @@
         hideContent() {
             if ( this.isAnimating ) return;
             this.isAnimating = true;
+
+            const descriptions = [...document.getElementsByClassName('description')]
+            descriptions.forEach(el => {
+                el.classList.remove('uk-hidden')
+            })
 
             // First scroll to the top
             scrollIt(0, 300, 'easeOutQuad', () => {
